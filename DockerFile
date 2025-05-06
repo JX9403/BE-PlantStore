@@ -17,7 +17,7 @@ FROM eclipse-temurin:17-jdk
 WORKDIR /app
 
 # Copy file JAR từ giai đoạn build
-COPY --from=build /app/target/*.jar app.jar
+COPY --from=build /app/target/plantstore-0.0.1-SNAPSHOT.jar app.jar
 
 # Mở cổng 8080 (Spring Boot mặc định)
 EXPOSE 8080
