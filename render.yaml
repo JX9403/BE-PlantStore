@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: plantstore-api
+    env: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod

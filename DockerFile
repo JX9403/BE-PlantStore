@@ -1,0 +1,26 @@
+# Dùng JDK 17 chính thức từ Eclipse Temurin
+FROM eclipse-temurin:17-jdk AS build
+
+# Làm việc trong thư mục /app
+WORKDIR /app
+
+# Copy toàn bộ mã nguồn vào container
+COPY . .
+
+# Cấp quyền cho Maven Wrapper và build ứng dụng
+RUN chmod +x mvnw && ./mvnw clean package -DskipTests
+
+# ---------------------
+# Giai đoạn chạy (RUN-TIME only)
+FROM eclipse-temurin:17-jdk
+
+WORKDIR /app
+
+# Copy file JAR từ giai đoạn build
+COPY --from=build /app/target/*.jar app.jar
+
+# Mở cổng 8080 (Spring Boot mặc định)
+EXPOSE 8080
+
+# Lệnh chạy ứng dụng
+CMD ["java", "-jar", "app.jar"]
