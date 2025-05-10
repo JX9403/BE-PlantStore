@@ -1,28 +1,9 @@
-# Dùng JDK 17 chính thức từ Eclipse Temurin
-FROM eclipse-temurin:17-jdk AS build
+FROM maven:3.8.5-openjdk-17 AS build
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-
-
-# Làm việc trong thư mục /app
-WORKDIR /app
-
-# Copy toàn bộ mã nguồn vào container
-COPY . .
-
-# Cấp quyền cho Maven Wrapper và build ứng dụng
-RUN chmod +x mvnw && ./mvnw clean package -DskipTests
-
-# ---------------------
-# Giai đoạn chạy (RUN-TIME only)
-FROM eclipse-temurin:17-jdk
-
-WORKDIR /app
-
-# Copy file JAR từ giai đoạn build
+FROM openjdk:17.0.1-jdk-slim
 COPY --from=build /app/target/plantstore-0.0.1-SNAPSHOT.jar app.jar
-
-# Mở cổng 8080 (Spring Boot mặc định)
 EXPOSE 8080
-
-# Lệnh chạy ứng dụng
-CMD ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
