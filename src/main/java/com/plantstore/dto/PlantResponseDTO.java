@@ -23,6 +23,7 @@ public class PlantResponseDTO {
 
     private String model3D;
 
+    private String usdz ;
 
     private String image;
 

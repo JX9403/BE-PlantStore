@@ -50,7 +50,9 @@ public class PlantServiceImpl implements PlantService {
         if (plant.getImage() != null) {
             createdPlant.setImage(plant.getImage());
         }
-
+        if (plant.getUsdz() != null) {
+            createdPlant.setUsdz(plant.getUsdz());
+        }
         Optional<Category> category = categoryRepo.findById(plant.getCategory().getCategoryId());
         if(category.isEmpty()){
             throw new RuntimeException("Plant's category not found !");
@@ -97,7 +99,9 @@ public class PlantServiceImpl implements PlantService {
         if (plant.getImage() != null) {
             updatedPlant.setImage(plant.getImage());
         }
-
+        if (plant.getUsdz() != null) {
+            updatedPlant.setUsdz(plant.getUsdz());
+        }
         Optional<Category> category = categoryRepo.findById(plant.getCategory().getCategoryId());
         if(category.isEmpty()){
             throw new RuntimeException("Plant's category not found !");
@@ -143,6 +147,8 @@ public class PlantServiceImpl implements PlantService {
         dto.setQuantity(plant.getQuantity());
         dto.setModel3D(plant.getModel3D());
         dto.setImage(plant.getImage());
+        dto.setUsdz(plant.getUsdz());
+
         dto.setCategory(
                 plant.getCategory() != null ? plant.getCategory().getCategoryName() : null
         );

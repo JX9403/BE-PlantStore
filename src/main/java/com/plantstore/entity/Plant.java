@@ -34,6 +34,7 @@ public class Plant {
 
     private String model3D;
 
+    private String usdz;
 
     private String image;
 
@@ -41,17 +42,4 @@ public class Plant {
     @JoinColumn(name = "category_id", nullable = true)
     private Category category;
 
-    @Override
-    public String toString() {
-        return "Plant{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", quantity=" + quantity +
-                ", model3D='" + model3D + '\'' +
-                ", image='" + image + '\'' +
-                ", category=" + category +
-                '}';
-    }
 }
